@@ -1,6 +1,8 @@
 import dadosSPF from './dadosSPF.json' assert { type: "json" };
 
 (() => {
+    const arrowIcon = document.querySelector('.arrow-icon');
+    const placarSection = document.querySelector('section.placar')
     const progressTable = document.querySelector('.table-progress');
     const updateDate = document.querySelector('.placar h1 + p');
     const secondsWrapper = document.querySelector('#segundos');
@@ -10,11 +12,17 @@ import dadosSPF from './dadosSPF.json' assert { type: "json" };
     const eventDate = new Date ('2023-05-04 07:30:00');
     const today = Date.now();
 
-    updateDate.innerText = `Atualizado pela última vez no dia ${dadosSPF.dataAtualizacao} às ${dadosSPF.horaAtualizacao}.`
-
-    const updateChart = percentage => {
-
+    arrowIcon.onclick = () => {
+        window.scrollTo({
+            top: placarSection.offsetTop,
+            behavior: "smooth"
+        });
     }
+
+    updateDate.innerText = `Atualizado pela última vez no dia ${dadosSPF.dataAtualizacao} às ${dadosSPF.horaAtualizacao}.`
+    
+    const pointsArray = dadosSPF.dados.map(e => e.pontos);
+    const higherPointsAmount = Math.max(...pointsArray);
 
     dadosSPF.dados.forEach(e => {
         const formattedPoints = new Intl.NumberFormat('pt-br').format(+e.pontos);
@@ -23,8 +31,9 @@ import dadosSPF from './dadosSPF.json' assert { type: "json" };
         const progressBar = document.createElement('div');
         const pontos = document.createElement('p');
 
-        const percentageProgressBar = +e.pontos/100;
-        progressBar.style.width = `${percentageProgressBar}%`;
+        const percentage = +e.pontos*100/higherPointsAmount;
+
+        progressBar.style.width = `${percentage}%`;
         pontos.innerText = `${formattedPoints} pontos`;
         turma.innerText = e.turma;
         progressBar.className = 'progress-bar';
