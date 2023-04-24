@@ -4,27 +4,27 @@
     "dados": [
         {
             "turma": "1º A",
-            "pontos": 2
+            "pontos": 0
         },
         {
             "turma": "1º B",
-            "pontos": 5
+            "pontos": 0
         },
         {
             "turma": "1º C",
-            "pontos": 11
+            "pontos": 0
         },
         {
             "turma": "2º A",
-            "pontos": 7
+            "pontos": 0
         },
         {
             "turma": "2º B",
-            "pontos": 6
+            "pontos": 0
         },
         {
             "turma": "2º C",
-            "pontos": 10
+            "pontos": 0
         }
     ]
 }
