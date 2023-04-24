@@ -1,0 +1,30 @@
+{
+    "dataAtualizacao": "24/04/23",
+    "horaAtualizacao": "12h",
+    "dados": [
+        {
+            "turma": "1º A",
+            "pontos": 3000
+        },
+        {
+            "turma": "1º B",
+            "pontos": 1024
+        },
+        {
+            "turma": "1º C",
+            "pontos": 1024
+        },
+        {
+            "turma": "2º A",
+            "pontos": 1024
+        },
+        {
+            "turma": "2º B",
+            "pontos": 1024
+        },
+        {
+            "turma": "2º C",
+            "pontos": 1024
+        }
+    ]
+}
