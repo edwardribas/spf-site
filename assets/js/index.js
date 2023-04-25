@@ -23,8 +23,9 @@ import dadosSPF from './dadosSPF.json' assert { type: "json" };
     
     const pointsArray = dadosSPF.dados.map(e => e.pontos);
     const higherPointsAmount = Math.max(...pointsArray);
+    const dadosOrdenados = dadosSPF.dados.sort((a, b) => b.pontos - a.pontos);
 
-    dadosSPF.dados.forEach(e => {
+    dadosOrdenados.forEach(e => {
         const formattedPoints = new Intl.NumberFormat('pt-br').format(+e.pontos);
         const container = document.createElement('div');
         const turma = document.createElement('h4');

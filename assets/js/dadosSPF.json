@@ -3,14 +3,6 @@
     "horaAtualizacao": "10h",
     "dados": [
         {
-            "turma": "2º C",
-            "pontos": 3258000
-        },
-        {
-            "turma": "2º B",
-            "pontos": 2180000
-        },
-        {
             "turma": "1º A",
             "pontos": 1493600
         },
@@ -25,6 +17,14 @@
         {
             "turma": "2º A",
             "pontos": 300500
+        },
+        {
+            "turma": "2º C",
+            "pontos": 3258000
+        },
+        {
+            "turma": "2º B",
+            "pontos": 2180000
         }
     ]
 }
