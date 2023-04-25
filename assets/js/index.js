@@ -32,6 +32,12 @@ import dadosSPF from './dadosSPF.json' assert { type: "json" };
         const progressBar = document.createElement('div');
         const pontos = document.createElement('p');
 
+        const pointsToFirstPlace = new Intl.NumberFormat('pt-br').format((higherPointsAmount - e.pontos)+1);
+        const messageData = +e.pontos === higherPointsAmount
+            ? 'Essa sala já está em primeiro lugar!'
+            : `Essa sala precisa de mais ${pointsToFirstPlace} pontos para ficar em primeiro lugar.`;
+        progressBar.setAttribute('data-message', messageData);
+
         const percentage = +e.pontos*100/higherPointsAmount;
 
         progressBar.style.width = `${percentage}%`;
