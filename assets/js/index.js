@@ -9,49 +9,51 @@ import dadosSPF from './dadosSPF.json' assert { type: "json" };
     const minutesWrapper = document.querySelector('#minutos');
     const hoursWrapper = document.querySelector('#horas');
     const daysWrapper = document.querySelector('#dias');
+
     const eventDate = new Date ('2023-05-04 07:30:00');
     const today = Date.now();
 
-    arrowIcon.onclick = () => {
-        window.scrollTo({
-            top: placarSection.offsetTop,
-            behavior: "smooth"
-        });
-    }
-
-    updateDate.innerText = `Atualizado pela última vez no dia ${dadosSPF.dataAtualizacao} às ${dadosSPF.horaAtualizacao}.`
+    const formatter = new Intl.NumberFormat('pt-br');
+    let timeLeft = Math.floor((eventDate - today) / 1000);
     
+    const formatDigit = (digit) => String(digit).padStart(2, '0');
+
     const pointsArray = dadosSPF.dados.map(e => e.pontos);
     const higherPointsAmount = Math.max(...pointsArray);
     const dadosOrdenados = dadosSPF.dados.sort((a, b) => b.pontos - a.pontos);
 
-    dadosOrdenados.forEach(e => {
-        const formattedPoints = new Intl.NumberFormat('pt-br').format(+e.pontos);
-        const container = document.createElement('div');
-        const turma = document.createElement('h4');
-        const progressBar = document.createElement('div');
-        const pontos = document.createElement('p');
+    const generateScoreContent = () => {
+        updateDate.innerText = `Atualizado pela última vez no dia ${dadosSPF.dataAtualizacao} às ${dadosSPF.horaAtualizacao}.`;
 
-        const pointsToFirstPlace = new Intl.NumberFormat('pt-br').format((higherPointsAmount - e.pontos)+1);
-        const messageData = +e.pontos === higherPointsAmount
-            ? 'Essa sala já está em primeiro lugar!'
-            : `Essa sala precisa de mais ${pointsToFirstPlace} pontos para ficar em primeiro lugar.`;
-        progressBar.setAttribute('data-message', messageData);
+        dadosOrdenados.forEach((equipe, i, equipes) => {
+            const {pontos, turma} = equipe;
+            const progressBar = document.createElement('div');
+            const dadosWrapper = document.createElement('div');
+            const turmaWrapper = document.createElement('h4');
+            const pontosWrapper = document.createElement('p');
 
-        const percentage = +e.pontos*100/higherPointsAmount;
+            const pointsToFirstPlace = (higherPointsAmount - +pontos) + 1;
+            const formattedPoints = formatter.format(+pontos);
+            const formattedPointsToFirstPlace = formatter.format(pointsToFirstPlace);
 
-        progressBar.style.width = `${percentage}%`;
-        pontos.innerText = `${formattedPoints} pontos`;
-        turma.innerText = e.turma;
-        progressBar.className = 'progress-bar';
+            const messageData = i === 0
+                ? `O ${turma} está em primeiro lugar.`
+                : pontos === higherPointsAmount
+                    ? `O ${turma} está empatado com o ${equipes[0].turma}.`
+                    : `O ${turma} precisa de mais ${formattedPointsToFirstPlace} ponto${pointsToFirstPlace > 1 ? 's' : ''} para ficar em primeiro lugar.`;
 
-        [turma, progressBar, pontos].forEach(e => container.appendChild(e));
-        progressTable.appendChild(container);
-    });
+            progressBar.setAttribute('data-message', messageData);
+            const percentageBar = +pontos*100/higherPointsAmount;
     
-    const formatDigit = (digit) => String(digit).padStart(2, '0');
-    let timeLeft = Math.floor((eventDate - today) / 1000);
-    const stopCount = () => clearInterval(interval);
+            progressBar.style.width = `${percentageBar}%`;
+            pontosWrapper.innerText = `${formattedPoints} pontos`;
+            turmaWrapper.innerText = turma;
+            progressBar.className = 'progress-bar';
+    
+            [turmaWrapper, progressBar, pontosWrapper].forEach(e => dadosWrapper.appendChild(e));
+            progressTable.appendChild(dadosWrapper);
+        });
+    }
     
     const updateTimeleft = (time) => {
         const seconds = time % 60;
@@ -66,10 +68,20 @@ import dadosSPF from './dadosSPF.json' assert { type: "json" };
     }
 
     const interval = setInterval(() => {
-        if (timeLeft === 0) stopCount();
-        updateTimeleft(timeLeft);
+        if (timeLeft === 0) clearInterval(interval);
         timeLeft--;
+        updateTimeleft(timeLeft);
     }, 1000);
 
-
+    arrowIcon.onclick = () => {
+        window.scrollTo({
+            top: placarSection.offsetTop,
+            behavior: "smooth"
+        });
+    }
+    
+    window.onload = () => {
+        updateTimeleft(timeLeft);
+        generateScoreContent();
+    }
 })();

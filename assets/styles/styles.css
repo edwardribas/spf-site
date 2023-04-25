@@ -118,13 +118,13 @@ section {
 
 .countdown h2 {
     font-size: 2rem;
-    font-weight: 800;
+    font-weight: 900;
 }
 
 .countdown p {
     text-transform: uppercase;
-    font-size: 0.92rem;
-    font-weight: 500;
+    font-size: .9rem;
+    font-weight: 400;
 
 }
 
