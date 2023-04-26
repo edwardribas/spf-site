@@ -4,27 +4,27 @@
     "dados": [
         {
             "turma": "1º A",
-            "pontos": 1493600
+            "pontos": 4149700
         },
         {
             "turma": "1º B",
-            "pontos": 1451600
+            "pontos": 7080100
         },
         {
             "turma": "1º C",
-            "pontos": 1142200
+            "pontos": 8685700
         },
         {
             "turma": "2º A",
-            "pontos": 300500
+            "pontos": 2897500
         },
         {
             "turma": "2º C",
-            "pontos": 3258000
+            "pontos": 5912000
         },
         {
             "turma": "2º B",
-            "pontos": 2530000
+            "pontos": 5736000
         }
     ]
 }
