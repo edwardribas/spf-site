@@ -1,30 +1,30 @@
 {
-    "dataAtualizacao": "28/04/23",
-    "horaAtualizacao": "12h 40min",
+    "dataAtualizacao": "02/05/23",
+    "horaAtualizacao": "18h 35min",
     "dados": [
         {
             "turma": "1º A",
-            "pontos": 27448500
+            "pontos": 33770900
         },
         {
             "turma": "1º B",
-            "pontos": 36172600
+            "pontos": 43469700
         },
         {
             "turma": "1º C",
-            "pontos": 27668300
+            "pontos": 29137700
         },
         {
             "turma": "2º A",
-            "pontos": 28179500
+            "pontos": 30975600
         },
         {
             "turma": "2º C",
-            "pontos": 29623700
+            "pontos": 37164900
         },
         {
             "turma": "2º B",
-            "pontos": 77441000
+            "pontos": 107866000
         }
     ]
 }
