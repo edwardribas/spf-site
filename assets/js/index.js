@@ -5,10 +5,7 @@ import dadosSPF from './dadosSPF.json' assert { type: "json" };
     const placarSection = document.querySelector('section.placar')
     const progressTable = document.querySelector('.table-progress');
     const updateDate = document.querySelector('.placar h1 + p');
-    const secondsWrapper = document.querySelector('#segundos');
-    const minutesWrapper = document.querySelector('#minutos');
-    const hoursWrapper = document.querySelector('#horas');
-    const daysWrapper = document.querySelector('#dias');
+    const countdownWrapper = document.querySelector('.countdown');
 
     const eventDate = new Date ('2023-05-04 07:30:00');
     const today = Date.now();
@@ -23,7 +20,7 @@ import dadosSPF from './dadosSPF.json' assert { type: "json" };
     const dadosOrdenados = dadosSPF.dados.sort((a, b) => b.pontos - a.pontos);
 
     const generateScoreContent = () => {
-        updateDate.innerText = `Atualizado pela última vez no dia ${dadosSPF.dataAtualizacao} às ${dadosSPF.horaAtualizacao}.`;
+        updateDate.innerText = `Última contagem realizada no dia ${dadosSPF.dataAtualizacao} às ${dadosSPF.horaAtualizacao}.`;
 
         dadosOrdenados.forEach((equipe, i, equipes) => {
             const {pontos, turma} = equipe;
@@ -57,14 +54,40 @@ import dadosSPF from './dadosSPF.json' assert { type: "json" };
     
     const updateTimeleft = (time) => {
         const seconds = time % 60;
-        const minutes = Math.floor((time % (60 * 60)) / 60);
-        const hours = Math.floor((time % (60 * 60 * 24)) / (60 * 60));
-        const days = Math.floor(time / (60 * 60 * 24));
-    
-        secondsWrapper.textContent = formatDigit(seconds);
-        minutesWrapper.textContent = formatDigit(minutes);
-        hoursWrapper.textContent = formatDigit(hours);
-        daysWrapper.textContent = formatDigit(days);
+        const minutes = formatDigit(Math.floor((time % (60 * 60)) / 60));
+        const hours = formatDigit(Math.floor((time % (60 * 60 * 24)) / (60 * 60)));
+        const days = formatDigit(Math.floor(time / (60 * 60 * 24)));
+
+        const now = new Date();
+        const day = now.getDate();
+        const month = now.getMonth()+1;
+        const year = new Date().getFullYear();
+
+        if (timeLeft === 0) {
+            if (day === 4 && month === 5 && year === 2023)
+                countdownWrapper.innerHTML = "<h2>O evento já começou! Acompanhe tudo pelo nosso <a href=\"#\">instagram</a>.</h2>"
+            else
+                countdownWrapper.innerHTML = "<h2>Infelizmente a SPF de 2023 já ocorreu, mas fique atento aos próximos anos!</h2>"
+        };
+
+        countdownWrapper.innerHTML = `
+            <div>
+                <h2>${days}</h2>
+                <p>Dias</p>
+            </div>
+            <div>
+                <h2>${hours}</h2>
+                <p>Horas</p>
+            </div>
+            <div>
+                <h2>${minutes}</h2>
+                <p>Minutos</p>
+            </div>
+            <div>
+                <h2>${seconds}</h2>
+                <p>Segundos</p>
+            </div>
+        `;
     }
 
     const interval = setInterval(() => {

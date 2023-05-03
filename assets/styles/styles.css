@@ -108,6 +108,7 @@ section {
     gap: 32px;
 }
 
+
 .countdown div {
     display: flex;
     flex-direction: column;
@@ -119,6 +120,15 @@ section {
 .countdown h2 {
     font-size: 2rem;
     font-weight: 900;
+}
+
+.countdown > h2 {
+    font-weight: 400;
+    font-size: 1.6rem;
+}
+
+.countdown > h2 a {
+    color: var(--amarelo-secundario);
 }
 
 .countdown p {
