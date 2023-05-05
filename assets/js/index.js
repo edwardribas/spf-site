@@ -58,10 +58,6 @@ import dadosSPF from './dadosSPF.json' assert { type: "json" };
         const hours = formatDigit(Math.floor((time % (60 * 60 * 24)) / (60 * 60)));
         const days = formatDigit(Math.floor(time / (60 * 60 * 24)));
 
-
-
-        
-
         countdownWrapper.innerHTML = `
             <div>
                 <h2>${days}</h2>
