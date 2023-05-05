@@ -58,17 +58,9 @@ import dadosSPF from './dadosSPF.json' assert { type: "json" };
         const hours = formatDigit(Math.floor((time % (60 * 60 * 24)) / (60 * 60)));
         const days = formatDigit(Math.floor(time / (60 * 60 * 24)));
 
-        const now = new Date();
-        const day = now.getDate();
-        const month = now.getMonth()+1;
-        const year = new Date().getFullYear();
 
-        if (timeLeft === 0) {
-            if (day === 4 && month === 5 && year === 2023)
-                countdownWrapper.innerHTML = "<h2>O evento já começou! Acompanhe tudo pelo nosso <a href=\"#\">instagram</a>.</h2>"
-            else
-                countdownWrapper.innerHTML = "<h2>Infelizmente a SPF de 2023 já ocorreu, mas fique atento aos próximos anos!</h2>"
-        };
+
+        
 
         countdownWrapper.innerHTML = `
             <div>
@@ -91,7 +83,6 @@ import dadosSPF from './dadosSPF.json' assert { type: "json" };
     }
 
     const interval = setInterval(() => {
-        if (timeLeft === 0) clearInterval(interval);
         timeLeft--;
         updateTimeleft(timeLeft);
     }, 1000);
@@ -104,7 +95,21 @@ import dadosSPF from './dadosSPF.json' assert { type: "json" };
     }
     
     window.onload = () => {
-        updateTimeleft(timeLeft);
         generateScoreContent();
+        if (timeLeft <= 0) {
+            const now = new Date();
+            const day = now.getDate();
+            const month = now.getMonth()+1;
+            const year = new Date().getFullYear();
+
+            if ((day === 4 || day === 5) && month === 5 && year === 2023)
+                countdownWrapper.innerHTML = "<h2>O evento já está acontecendo! Acompanhe tudo pelo nosso <a href=\"https://www.instagram.com/mcm_spf/\" target=\"_blank\">instagram</a>.</h2>"
+            else
+                countdownWrapper.innerHTML = "<h2>A SPF de 2023 já terminou, veja tudo que rolou no nosso <a href=\"https://www.instagram.com/mcm_spf/\" target=\"_blank\">instagram</a>!</h2>"
+            
+            clearInterval(interval);
+            return;
+        };
+        updateTimeleft(timeLeft);
     }
 })();
